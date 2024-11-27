@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO APP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="p-3 mb-2 bg-light text-dark mx-4" >
+    <!--navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><h5>TODO LIST</h5></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+                <form class="d-flex " action="/search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-dark" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!--form-->
+    <form action="/"method="POST">
+        <div class="container mx-0 my-3">
+            <label for="Title" class="form-label"><h6>Title</h6></label>
+            <input type="text" class="form-control" name="title" id="Title">
+            
+        </div>
+        <div class="container mx-1">
+            <label for="Description" class="form-label"><h6>Description</h6></label>
+            <input type="text" class="form-control" name="desc" id="desc">
+        </div>
+        <div class="container mx-1">
+            <label for="duedate" class="form-label"><h6>Due-Date</h6></label>
+            <input type="date" class="form-control" name="ddate" id="ddate">
+        </div>
+        <div class="container mx-1 my-3">
+            <label for="status" class="form-label"><h6>Status</h6></label>
+            <select class="form-select" name="status" id="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="Started">Started</option>
+                <option value="Not-Started">Not Started</option>
+                <option value="Done">Done</option>
+            </select>
+        </div>
+
+        <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-sm my-4 mx-5">Submit</button>
+        </div>
+    </form>
+    <!--table-->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SNo.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due-Date</th>
+                <th scope="col">Task status</th>
+                <th scope="col">Action</th>
+                
+            </tr>
+        </thead>
+
+        {% for todo in alltodo %}
+            
+       
+        <tbody>
+            <tr>
+                <th>{{loop.index}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
+                <td>{{todo.date}}</td>
+                <td>{{todo.status}}</td>
+                <td><a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-primary btn-sm mx-1">Update</button>
+                    <a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+       
+
+
+
+    </table>
+</body>
+
+</html>
